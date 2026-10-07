@@ -34,7 +34,6 @@
       padding-bottom: 60px;
     }
 
-    /* Music Player Widget */
     .music-widget {
       position: fixed;
       top: 16px;
@@ -176,7 +175,6 @@
 </head>
 <body>
 
-  <!-- Background Music Audio -->
   <audio id="bgMusic" loop src="music.mp3"></audio>
 
   <div class="music-widget" onclick="toggleMusic()">
@@ -325,7 +323,6 @@ I love you baba, I love you.
       document.getElementById('lightbox').classList.add('active');
     }
 
-    // Music Toggle Function
     const audio = document.getElementById('bgMusic');
     function toggleMusic() {
       const btn = document.getElementById('musicBtn');
@@ -342,7 +339,6 @@ I love you baba, I love you.
       }
     }
 
-    // Hearts Animation
     const heartsContainer = document.getElementById('heartsContainer');
     for (let i = 0; i < 12; i++) {
       const heart = document.createElement('div');
@@ -354,15 +350,20 @@ I love you baba, I love you.
       heartsContainer.appendChild(heart);
     }
 
-    // Live Countdown Timer
     const startDate = new Date('2025-10-07T00:00:00').getTime();
     function updateCounter() {
       const now = new Date().getTime();
-      const diff = now - startDate;
-      document.getElementById('days').textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
-      document.getElementById('hours').textContent = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-      document.getElementById('minutes').textContent = String(Math.floor((diff % (1000 * 60 * 60))) / (1000 * 60)).padStart(2, '0');
-      document.getElementById('seconds').textContent = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      const diff = Math.max(0, now - startDate);
+      
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
     }
     setInterval(updateCounter, 1000);
     updateCounter();
